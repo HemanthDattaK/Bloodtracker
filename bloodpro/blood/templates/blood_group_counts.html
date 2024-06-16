@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://kit.fontawesome.com/1db75a16db.js" crossorigin="anonymous"></script>
+    <title>Blood Group Counts</title>
+    <style>
+        body {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+          }
+        /* Base styles for the table */
+        table {
+            width: 350px; /* Fixed width for each table */
+            border-collapse: collapse;
+            margin: 40px;
+            font-size: 18px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for table headers */
+        th, td {
+            padding: 15px 21px;
+            border: 1px solid black;
+        }
+      
+        /* Header background and text color */
+        th {
+            background-color: #f2b6b6;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Alternate row background color */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Hover effect for rows */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Style for the table container for responsiveness */
+        .table-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Make the text align center */
+        td, th {
+            text-align: center;
+        }
+
+        /* Style for the first cell of each row */
+        td:first-child, th:first-child {
+            text-align: left;
+        }
+
+        /* Style for the table caption */
+        caption {
+            caption-side: top;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            color: #d9534f;
+        }
+
+        /* Specific styles for different blood groups */
+        .a-positive { background-color: #f2dede; }
+        .b-positive { background-color: #dff0d8; }
+        .o-positive { background-color: #d9edf7; }
+        .ab-positive { background-color: #fcf8e3; }
+        .a-negative { background-color: #f2dede; }
+        .b-negative { background-color: #dff0d8; }
+        .o-negative { background-color: #d9edf7; }
+        .ab-negative { background-color: #fcf8e3; }
+
+        /* Style for count cells */
+        .count {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .taskbar a {
+            float: right;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .taskbar a:hover {
+            color: red;
+        }
+
+        .taskbar-right {
+            float: middle;
+        }
+
+        /* Styles for responsiveness */
+        @media screen and (max-width: 600px) {
+            .taskbar a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .taskbar-right {
+                float: none;
+            }
+
+            .table-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            table {
+                width: 90%; /* Adjust width for smaller screens */
+            }
+        }
+        img
+        {
+            width:160px;
+            height:80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="taskbar">
+            <img src="https://raw.githubusercontent.com/Henryhose/musicplayer/main/blood.png"></a>
+        <div class="taskbar-right">
+            <a href="{% url 'display_forms' %}"><i class="fa-solid fa-list" style="color: #ff0000;"></i><br>donor list</a>
+            <a href="{% url 'submit_form' %}"><i class="fa-solid fa-droplet" style="color: #ff0000;"></i><br>Donate</a>
+            <a href="{% url 'blood_group_counts' %}"><i class="fa-solid fa-house" style="color: #ff0000;"></i><br>Home</a>
+
+            
+        </div>
+    </div>
+    <h1>Availability of Blood</h1>
+    <div class="table-container">
+        <table>
+            <caption>Blood Group A+</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'A+' %}
+                <tr class="a-positive">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group B+</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'B+' %}
+                <tr class="b-positive">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group O+</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'O+' %}
+                <tr class="o-positive">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group AB+</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'AB+' %}
+                <tr class="ab-positive">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group A-</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'A-' %}
+                <tr class="a-negative">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group B-</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'B-' %}
+                <tr class="b-negative">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group O-</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'O-' %}
+                <tr class="o-negative">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <caption>Blood Group AB-</caption>
+            <tbody>
+                {% for group in blood_group_counts %}
+                {% if group.blood_group == 'AB-' %}
+                <tr class="ab-negative">
+                    <td>{{ group.blood_group }}</td>
+                    <td class="count">{{ group.count }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
